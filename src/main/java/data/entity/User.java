@@ -5,17 +5,17 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name ="uuser")
+@Table
 public class User {
     @Id
-    @GeneratedValue(generator = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
-    @Column(name = "name", nullable = false)
+
     private String name;
-    @Column(name = "lastName", nullable = false)
+
     private String lastName;
-    @Column(name = "age", nullable = false)
+
     private int age;
 
     public User(){}
@@ -28,6 +28,10 @@ public class User {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -52,5 +56,14 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User " +
+                "id= " + id + "," +
+                "  name= " + name + "," +
+                "  lastName= " + lastName + "," +
+                "  age= " + age;
     }
 }
