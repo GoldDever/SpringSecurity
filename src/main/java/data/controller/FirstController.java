@@ -17,7 +17,7 @@ public class FirstController {
     private UserService userService;
 
     @GetMapping(value = "/")
-    public String firstPage(Model model) {
+    public String firstPage(Model model ) {
         return "firstView";
     }
 

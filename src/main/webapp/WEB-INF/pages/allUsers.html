@@ -5,8 +5,11 @@
     <title>List of all users</title>
 </head>
 <body>
+
 <div th:each="us : ${usersAll}">
-    <a th:text="${us.getName()}"/>
+
+    <a th:href="@{/{id}/edit(id=${us.getId()})}" th:text="${us.getName()}">user</a>
+
 </div>
 </body>
 </html>
