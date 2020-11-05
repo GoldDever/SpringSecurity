@@ -13,7 +13,7 @@ public class UserDaoImpl implements UserDao{
 
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public List<User> getAll() {

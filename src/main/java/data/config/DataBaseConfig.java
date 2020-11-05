@@ -24,7 +24,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories("data.repository")
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
 @ComponentScan("data")
