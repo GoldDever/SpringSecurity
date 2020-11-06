@@ -9,6 +9,5 @@ public interface UserDao {
     User getById(long id);
     void save(User user);
     void remove(long id);
-
     void update(long id, User user);
 }

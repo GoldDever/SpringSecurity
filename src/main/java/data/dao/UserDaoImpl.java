@@ -2,13 +2,11 @@ package data.dao;
 
 import data.entity.User;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Component
-@Transactional(readOnly = true)
 public class UserDaoImpl implements UserDao{
 
 
@@ -27,18 +25,16 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    @Transactional
     public void save(User user) {
         entityManager.persist(user);
     }
 
-    @Transactional
+    @Override
     public void update(long id, User updatedUser) {
         entityManager.merge(updatedUser);
     }
 
     @Override
-    @Transactional
     public void remove(long id) {
         User user = getById(id);
         entityManager.remove(user);
