@@ -1,26 +1,42 @@
 package data.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table
-public class User {
+public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "user_id")
     private long id;
-
+    @Column(name = "login")
+    private String login;
+    @Column(name = "password")
+    private String password;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+    @Column(name = "name")
     private String name;
-
+    @Column(name = "last_name")
     private String lastName;
-
+    @Column(name = "age")
     private int age;
 
     public User(){}
 
-    public User(String name, String lastName, int age) {
+    public User(String login, String password, Set<Role> roles, String name, String lastName, int age) {
+        this.login = login;
+        this.id = id;
+        this.password = password;
+        this.roles = roles;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -30,9 +46,17 @@ public class User {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getLogin() {
+        return login;
     }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+   /* public void setId(long id) {
+        this.id = id;
+    }*/
 
     public String getName() {
         return name;
@@ -65,5 +89,40 @@ public class User {
                 "  name= " + name + "," +
                 "  lastName= " + lastName + "," +
                 "  age= " + age;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
