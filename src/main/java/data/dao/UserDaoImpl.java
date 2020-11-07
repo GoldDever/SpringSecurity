@@ -1,6 +1,7 @@
 package data.dao;
 
 import data.entity.User;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,6 +43,11 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public User getUserByUserName(String login) {
-        return entityManager.find(User.class, login);
+
+        Query q = (Query) entityManager.createQuery("select user from User user where user.name = :name");
+        q.setParameter("name", login);
+        User user = (User) q.getSingleResult();
+        //return (User) entityManager.createQuery("select u from User u where u=:login", User.class);
+        return user;
     }
 }
