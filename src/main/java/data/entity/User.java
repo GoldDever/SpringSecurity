@@ -1,6 +1,7 @@
 package data.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.SelectBeforeUpdate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,9 +11,10 @@ import java.util.Set;
 
 @Entity
 @Table
+@SelectBeforeUpdate
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "user_id")
     private long id;
@@ -20,7 +22,7 @@ public class User implements UserDetails {
     private String login;
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
     @Column(name = "name")
@@ -84,11 +86,11 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "User " +
-                "id= " + id + "," +
-                "  name= " + name + "," +
-                "  lastName= " + lastName + "," +
-                "  age= " + age;
+        return "User  " +
+                "id=  " + id + ", " +
+                "  name =  " + name + ", " +
+                "  lastName =  " + lastName + ", " +
+                "  age =  " + age;
     }
 
     @Override

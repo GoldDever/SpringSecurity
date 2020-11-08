@@ -3,8 +3,13 @@ package data.controller;
 import data.entity.User;
 import data.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -42,21 +47,32 @@ public class FirstController {
         return "redirect:/allUsers";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/{id}/admin")
     public String editUser(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getById(id));
         return "edit";
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/admin")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") long id) {
         userService.update(id, user);
         return "redirect:/allUsers";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/admin")
     public String delete(@PathVariable("id") long id){
         userService.remove(id);
         return "redirect:/allUsers";
+    }
+
+    @GetMapping("page/user")
+    public String showOverview(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+            User user = (User) auth.getPrincipal();
+            model.addAttribute("userGotIn", user);
+
+        return "user";
     }
 }

@@ -9,5 +9,13 @@
 <div>
     <a th:text="${userByid}"/>
 </div>
+
+<br/>
+<br/>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Sign Out</button>
+</form>
+<br/>
+
 </body>
 </html>

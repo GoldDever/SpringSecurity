@@ -32,7 +32,11 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void update(long id, User updatedUser) {
-        entityManager.merge(updatedUser);
+        User user = getById(id);
+        user.setAge(updatedUser.getAge());
+        user.setName(updatedUser.getName());
+        user.setLastName(updatedUser.getLastName());
+        entityManager.merge(user);
     }
 
     @Override
@@ -43,11 +47,9 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public User getUserByUserName(String login) {
-
-        Query q = (Query) entityManager.createQuery("select user from User user where user.name = :name");
+        Query q = (Query) entityManager.createQuery("SELECT u FROM User u WHERE u.login=:name");
         q.setParameter("name", login);
         User user = (User) q.getSingleResult();
-        //return (User) entityManager.createQuery("select u from User u where u=:login", User.class);
         return user;
     }
 }

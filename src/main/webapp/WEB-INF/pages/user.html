@@ -2,20 +2,18 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Get User By id</title>
+    <title>User Page"</title>
 </head>
 <body>
-<a>Hello</a>
+<h1>Hello <a th:text="${userGotIn.name}"/>!</h1>
+
 <div>
-    <a th:text="${userByid}"/>
+    <h2 th:text="${userGotIn}"/>
 </div>
 
-<br/>
 <br/>
 <form th:action="@{/logout}" method="post">
     <button type="submit">Sign Out</button>
 </form>
-<br/>
-
 </body>
 </html>

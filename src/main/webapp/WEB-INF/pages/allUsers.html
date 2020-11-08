@@ -8,8 +8,15 @@
 
 <div th:each="us : ${usersAll}">
 
-    <a th:href="@{/{id}/edit(id=${us.getId()})}" th:text="${us.getName()}">user</a>
-
+    <a th:href="@{/{id}/admin(id=${us.getId()})}" th:text="${us}">user</a>
 </div>
+
+<br/>
+<br/>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Sign Out</button>
+</form>
+
+<br/>
 </body>
 </html>

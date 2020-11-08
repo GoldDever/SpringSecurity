@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Role implements GrantedAuthority {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     private long id;
     @Column(name = "role")
@@ -20,7 +20,8 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return null;
+
+        return role;
     }
 
     public long getId() {
