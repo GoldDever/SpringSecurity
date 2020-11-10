@@ -8,9 +8,7 @@
 
 <div th:each="us : ${usersAll}">
 
-    <a th:href="@{/{id}/admin(id=${us.getId()})}" th:text="${us}">user
-        <br/>
-    </a>
+    <a th:href="@{/{id}/admin(id=${us.getId()})}" th:text="${us}">user</a>
 </div>
 
 <br/>

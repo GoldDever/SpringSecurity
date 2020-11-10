@@ -39,8 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/addUser").hasRole("ADMIN")
                 .antMatchers("/{id}/admin")
                 .hasRole("ADMIN")
-                .antMatchers("/allUsers").hasAnyRole("ADMIN")
+                .antMatchers("/allUsers").hasRole("ADMIN")
                 .antMatchers("/{id}").hasRole("ADMIN")
+                .antMatchers("/page/user").hasRole("USER")
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .successHandler(successUserHandler)
@@ -49,8 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .invalidateHttpSession(true)
                 .clearAuthentication(true);
-                /*.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/logout-success").permitAll();*/
+
     }
 
     @Bean

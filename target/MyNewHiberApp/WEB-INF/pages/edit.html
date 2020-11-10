@@ -14,18 +14,27 @@
 
     <label for="age">Enter user's age</label>
     <input type="text" th:field="*{age}" id="age"/>
+
     <br/>
     <input type="submit" value="Update"/>
 </form>
 
 <form
-        th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+        th:method="DELETE" th:action="@{/{id}/admin(id=${user.getId()})}">
     <br/>
     <input type="submit" value="Delete"/>
 </form>
 
 <br/>
+
+<a href="/addUser">Add user</a>
+
 <br/>
+<br/>
+<a href="/allUsers">Get list of all users</a>
+<br/>
+<br/>
+
 <form th:action="@{/logout}" method="post">
     <button type="submit">Sign Out</button>
 </form>
