@@ -18,6 +18,7 @@ import org.springframework.transaction.jta.JtaTransactionManager;
 
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;

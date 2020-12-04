@@ -1,11 +1,15 @@
 package data.service;
 
 import data.dao.UserDao;
+import data.entity.Role;
 import data.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -31,14 +35,17 @@ public class UserServiceImpl implements UserService{
         userDao.save(user);
     }
 
+    @Override
     @Transactional
     public void update(long id, User updatedUser) {
+
         userDao.update(id, updatedUser);
     }
 
     @Override
     @Transactional
     public void remove(long id) {
+        System.out.println("In userService Delete method");
         userDao.remove(id);
     }
 
@@ -46,4 +53,15 @@ public class UserServiceImpl implements UserService{
     public User getUserByUserName(String name) {
         return userDao.getUserByUserName(name);
     }
+
+    @Override
+    public Set<Role> newRoles(String[] roles) {
+        System.out.println("new roles: " + roles);
+        Set<Role> roleSet = new HashSet<>();
+        for (String roleName : roles) {
+            roleSet.add(userDao.findRoleByName(roleName));
+        }
+        return roleSet;
+    }
+
 }

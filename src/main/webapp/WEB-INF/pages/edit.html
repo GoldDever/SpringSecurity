@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Edit user</title>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
+<form th:method="POST" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
     <label for="name">Enter user name</label>
     <input type="text" th:field="*{name}" id="name"/>
 
@@ -16,11 +17,37 @@
     <input type="text" th:field="*{age}" id="age"/>
 
     <br/>
+    <br/>
+    <label for="login">Enter user login</label>
+    <input type="text" th:field="*{login}" id="login"/>
+
+    <label for="password">Enter user password</label>
+    <input type="text" th:field="*{password}" id="password"/>
+
+
+
+   <!-- <ul>
+        <li th:each="role : ${allRoles}">
+            <input type="checkbox" name="sel_roles" th:field="${user.roles}" th:value="${role}"
+                   th:text="${role}" />
+        </li>
+    </ul>-->
+
+
+    <label>Roles:
+        <input type="checkbox"  name="allRoles"
+               th:each="role : ${allRoles}"
+               th:text="${role.getRole()}"
+               th:value="${role.getRole()}"
+        />
+    </label>
+    <br/>
+    <br/>
     <input type="submit" value="Update"/>
 </form>
 
 <form
-        th:method="DELETE" th:action="@{/{id}/admin(id=${user.getId()})}">
+        th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
     <br/>
     <input type="submit" value="Delete"/>
 </form>
@@ -42,3 +69,7 @@
 
 </body>
 </html>
+
+
+<!--
+name="${_csrf.parameterName}" value="${_csrf.token}"-->

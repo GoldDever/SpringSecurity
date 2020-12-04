@@ -13,8 +13,29 @@
     <label for="lastName">Enter user last name</label>
     <input type="text" th:field="*{lastName}" id="lastName"/>
 
-    <label for="age">Enter user's age</label>
+    <label for="age">Enter user age</label>
     <input type="text" th:field="*{age}" id="age"/>
+    <br/>
+    <br/>
+
+    <label for="login">Enter user login</label>
+    <input type="text" th:field="*{login}" id="login"/>
+
+    <label for="password">Enter user password</label>
+    <input type="text" th:field="*{password}" id="password"/>
+
+   <!-- <label for="roles">Enter user role</label>
+    <input type="text" th:field="*{roles}" id="roles"/>-->
+
+    <label>Roles:
+        <input type="checkbox" name="allRoles"
+               th:each="role : ${allRoles}"
+               th:text="${role.getRole()}"
+               th:value="${role.getRole()}"
+        />
+    </label>
+
+    <br/>
     <br/>
     <input type="submit" value="Create"/>
 </form>
