@@ -13,5 +13,5 @@ public interface UserService {
     void remove(long id);
     void update(long id, User user);
     User getUserByUserName(String name);
-    public Set<Role> newRoles(String[] roles);
+    User newRoles(User user);
 }

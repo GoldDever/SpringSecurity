@@ -12,9 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Controller
 public class FirstController {
 
@@ -48,8 +45,7 @@ public class FirstController {
     }
 
     @PostMapping()
-    public String saveNewUser(@ModelAttribute("user") User user,  @RequestParam(value = "allRoles") String[] roles) {
-        user.setRoles(userService.newRoles(roles));
+    public String saveNewUser(@ModelAttribute("user") User user) {
         userService.save(user);
         return "redirect:/allUsers";
     }
@@ -64,10 +60,7 @@ public class FirstController {
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute("user") User user,
-                         @PathVariable("id") long id, @RequestParam(value = "allRoles") String[] roles) {
-        user.setRoles(userService.newRoles(roles));
-        System.out.println("User _++++" + user);
-        System.out.println("User new roles???????" + userService.newRoles(roles));
+                         @PathVariable("id") long id ) {
         userService.update(id, user);
         return "redirect:/allUsers";
     }

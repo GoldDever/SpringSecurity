@@ -32,14 +32,15 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void save(User user) {
-        userDao.save(user);
+        User user1 = newRoles(user);
+        userDao.save(user1);
     }
 
     @Override
     @Transactional
     public void update(long id, User updatedUser) {
-
-        userDao.update(id, updatedUser);
+        User user = newRoles(updatedUser);
+        userDao.update(id, user);
     }
 
     @Override
@@ -55,13 +56,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Set<Role> newRoles(String[] roles) {
-        System.out.println("new roles: " + roles);
-        Set<Role> roleSet = new HashSet<>();
-        for (String roleName : roles) {
-            roleSet.add(userDao.findRoleByName(roleName));
-        }
-        return roleSet;
+    public User newRoles(User user) {
+      Set<Role> set = user.getRoles();
+      Set<Role> set2 = new HashSet<>();
+      for (Role r: set) {
+          set2.add(userDao.findRoleByName(r.getRole()));
+      }
+      user.setRoles(set2);
+        return user;
     }
 
 }

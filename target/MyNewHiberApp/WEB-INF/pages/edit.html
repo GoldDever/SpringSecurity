@@ -35,7 +35,7 @@
 
 
     <label>Roles:
-        <input type="checkbox"  name="allRoles"
+        <input type="checkbox" th:field="${user.roles}" name="allRoles"
                th:each="role : ${allRoles}"
                th:text="${role.getRole()}"
                th:value="${role.getRole()}"
