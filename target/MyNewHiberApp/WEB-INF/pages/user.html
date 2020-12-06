@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page"</title>
+</head>
+<body>
+<h1>Hello <a th:text="${userGotIn.name}"/>!</h1>
+
+<div>
+    <h2 th:text="${userGotIn}"/>
+</div>
+
+<br/>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Sign Out</button>
+</form>
+</body>
+</html>
