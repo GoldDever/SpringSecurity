@@ -3,14 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>List of all users</title>
+    <style>
+        th {
+            background: #f2f5f5; /* Цвет фона */
+            border: 2px solid black;  /* Параметры рамки */
+            padding: 10px; /* Поля вокруг текста */
+        }
+        td {
+            background: #f2f5f5; /* Цвет фона */
+            border: 2px solid black;  /* Параметры рамки */
+            padding: 10px; /* Поля вокруг текста */
+        }
+    </style>
 </head>
 <body>
 
-<div th:each="us : ${usersAll}">
+<!--<div th:each="us : ${usersAll}">
 
     <a th:href="@{/{id}/admin(id=${us.getId()})}" th:text="${us}">user</a>
-</div>
+</div>-->
 
+<br/>
+
+<table border="2" paddin="5">
+    <thead>
+    <tr>
+        <th>User Id</th>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Roles</th>
+        <th>login</th>
+        <th>password</th>
+    </tr>
+    </thead>
+    <tbody th:each="us : ${usersAll}">
+    <tr>
+        <td th:text="${us.getId()}" align="center">Id</td>
+        <td><a th:href="@{/{id}/admin(id=${us.getId()})}"  th:text="${us.getName()}">Name</a></td>
+        <td th:text="${us.getLastName()}">LastName</td>
+        <td th:text="${us.getAge()}">Age</td>
+        <td th:text="${us.getRoles()}">Roles</td>
+        <td th:text="${us.getUsername()}">Username</td>
+        <td th:text="${us.getPassword()}">Password</td>
+    </tr>
+    </tbody>
+</table>
 <br/>
 <br/>
 <form th:action="@{/logout}" method="post">

@@ -33,6 +33,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void save(User user) {
+
         entityManager.persist(user);
     }
 
@@ -45,7 +46,7 @@ public class UserDaoImpl implements UserDao{
         user.setRoles(updatedUser.getRoles());
         user.setLogin(updatedUser.getLogin());
         user.setPassword(updatedUser.getPassword());
-        entityManager.merge(user);
+        entityManager.merge(updatedUser);
         System.out.println("Inside userDaoImpl");
     }
 
